@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Player Auction</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="./styles.css" />
+  <!-- Optional: XLSX support for Excel files -->
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js" defer></script>
+  <script defer src="./app.js"></script>
+</head>
+<body>
+  <div id="app">
+    <header class="app-header">
+      <h1>Player Auction</h1>
+      <div class="file-load">
+        <label for="fileInput" class="btn btn-secondary">Load Players (CSV/XLSX)</label>
+        <input id="fileInput" type="file" accept=".csv,.xlsx,.xls" />
+        <button id="downloadBtn" class="btn btn-outline" disabled>Download Sold (CSV)</button>
+      </div>
+    </header>
+
+    <section class="panel">
+      <h2 class="panel-title">Team Configuration</h2>
+      <div class="team-config">
+        <div class="config-row">
+          <label for="teamCount">Number of Teams</label>
+          <select id="teamCount">
+            <option value="1">1</option><option value="2">2</option>
+            <option value="3">3</option><option value="4">4</option>
+            <option value="5" selected>5</option>
+          </select>
+        </div>
+
+        <div id="teamNames" class="team-names"></div>
+
+        <div class="config-row">
+          <label for="purseDefault">Purse per Team</label>
+          <input id="purseDefault" type="number" min="1" value="100" />
+        </div>
+
+        <button id="applyTeamsBtn" class="btn">Apply Teams</button>
+      </div>
+
+      <div id="teamsBoard" class="teams-board"></div>
+    </section>
+
+    <section class="panel">
+      <h2 class="panel-title">Auction</h2>
+
+      <div class="auction-grid">
+        <div class="player-card">
+          <div class="player-field">
+            <span class="label">Player Name</span>
+            <div id="playerName" class="value bold">—</div>
+          </div>
+          <div class="player-field">
+            <span class="label">Player Type</span>
+            <div id="playerType" class="value">—</div>
+          </div>
+          <div class="player-field">
+            <span class="label">Base Price</span>
+            <div id="basePrice" class="value">—</div>
+          </div>
+          <div class="player-field">
+            <span class="label">Current Bid</span>
+            <div id="currentBid" class="value emphasis">—</div>
+          </div>
+        </div>
+
+        <div class="controls-card">
+          <div class="control-row">
+            <label for="bidStep">Bid Increment</label>
+            <input id="bidStep" type="number" min="1" value="10" />
+          </div>
+
+          <div class="btn-row">
+            <button id="nextPlayerBtn" class="btn" disabled>Next Player</button>
+            <button id="nextBidBtn" class="btn btn-accent" disabled>Next Bid</button>
+            <button id="resetBtn" class="btn btn-outline">Reset</button>
+          </div>
+
+          <div class="control-row">
+            <label for="soldTo">Sold To</label>
+            <select id="soldTo" disabled>
+              <option value="">— Select Team —</option>
+            </select>
+          </div>
+
+          <button id="confirmSaleBtn" class="btn btn-success" disabled>Confirm Sale</button>
+          <div id="notice" class="notice" role="status" aria-live="polite"></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Spinner -->
+  <div id="spinner" class="spinner hidden" aria-hidden="true">
+    <div class="spinner-dot"></div>
+    <div class="spinner-dot"></div>
+    <div class="spinner-dot"></div>
+  </div>
+</body>
+</html>

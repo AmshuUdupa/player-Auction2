@@ -1,0 +1,249 @@
+:root {
+  --bg: #0b1020;
+  --panel: #121936;
+  --muted: #a7b0d6;
+  --text: #eef2ff;
+  --accent: #7c9cff;
+  --success: #10b981;
+  --warn: #f59e0b;
+  --danger: #ef4444;
+  --outline: #2a386b;
+  --card: #0f1530;
+  --shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+  --radius: 16px;
+}
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter,
+    Arial;
+  background: linear-gradient(180deg, #0a0f1f, #0b1020 40%);
+  color: var(--text);
+}
+#app {
+  max-width: 1100px;
+  margin: 24px auto;
+  padding: 0 16px;
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+h1 {
+  margin: 0;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+}
+.file-load {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+/* Add background color and spacing for all divs */
+input[type='file'] {
+  display: none;
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--outline);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+
+  padding: 16px 16px 20px;
+  margin-bottom: 18px;
+}
+.panel-title {
+  margin: 0 0 12px 0;
+  font-size: 18px;
+  color: #dbe3ff;
+}
+  /* Default background and spacing for all divs */
+
+.team-config {
+  display: grid;
+  gap: 12px;
+}
+.config-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.team-names {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 10px;
+}
+
+
+.teams-board {
+  margin-top: 10px;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+}
+.team-card {
+  background: var(--card);
+  padding: 12px;
+  border-radius: 14px;
+  border: 1px solid var(--outline);
+}
+
+.team-name {
+  font-weight: 700;
+}
+.team-purse {
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+.auction-grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: 1.1fr 0.9fr;
+}
+@media (max-width: 900px) {
+  .auction-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.player-card,
+.controls-card {
+  background: var(--card);
+  padding: 14px;
+  border-radius: 14px;
+  border: 1px solid var(--outline);
+}
+
+.player-field {
+  margin-bottom: 10px;
+}
+.label {
+  display: block;
+  font-size: 12px;
+  color: var(--muted);
+  letter-spacing: 0.4px;
+}
+.value {
+  font-size: 18px;
+}
+.bold {
+  font-weight: 800;
+}
+.emphasis {
+  font-size: 22px;
+}
+
+.btn-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.btn {
+  cursor: pointer;
+  border: 1px solid transparent;
+  background: var(--accent);
+  color: #0a1020;
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-weight: 700;
+  transition: transform 0.05s ease, filter 0.2s ease;
+  box-shadow: var(--shadow);
+}
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  filter: grayscale(0.6);
+}
+.btn:hover:not(:disabled) {
+  filter: brightness(1.05);
+}
+.btn:active {
+  transform: translateY(1px);
+}
+.btn-secondary {
+  background: #1b2450;
+  color: var(--text);
+  border-color: #2b3a7d;
+}
+.btn-outline {
+  background: transparent;
+  border-color: #3b4aa0;
+  color: var(--text);
+}
+.btn-accent {
+  background: var(--warn);
+  color: #0a1020;
+}
+.btn-success {
+  background: var(--success);
+  color: #03160f;
+}
+
+.control-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin: 10px 0;
+}
+input[type='number'],
+input[type='text'],
+select {
+  background: #0e1431;
+  color: var(--text);
+  border: 1px solid #26336d;
+  border-radius: 10px;
+  padding: 10px;
+  width: 220px;
+  max-width: 100%;
+}
+
+.notice {
+  margin-top: 8px;
+  min-height: 20px;
+  color: var(--muted);
+}
+
+.spinner {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(5, 8, 18, 0.6);
+  z-index: 50;
+}
+.spinner.hidden {
+  display: none;
+}
+.spinner-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  background: var(--accent);
+  margin: 6px;
+  animation: bounce 0.9s infinite alternate;
+}
+.spinner-dot:nth-child(2) {
+  animation-delay: 0.15s;
+}
+.spinner-dot:nth-child(3) {
+  animation-delay: 0.3s;
+}
+@keyframes bounce {
+  to {
+    transform: translateY(-10px);
+    opacity: 0.5;
+  }
+}

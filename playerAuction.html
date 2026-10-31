@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Player Auction System</title>
+    <link rel="stylesheet" href="pastyle.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>🏏 FLOC PLAYER AUCTION</h1>
+        <!-- <p>FLOC-FREEDOM CUP S2 - 2026</p> -->
+        <p class="remaining-players" id="remainingPlayers">
+          Remaining: 0 players
+        </p>
+
+        <div class="header-auction hidden" id="headerAuction">
+          <div class="player-card">
+            <div class="player-name" id="playerName">
+              Select a player file to begin
+            </div>
+            <div class="player-details" id="playerType"></div>
+            <div class="player-details" id="basePrice"></div>
+            <div class="current-bid" id="currentBid">Current Bid: 0</div>
+          </div>
+
+          <div class="controls-panel">
+            <div class="bid-controls">
+              <button class="btn" onclick="nextPlayer()">Next Player</button>
+              <button class="btn" onclick="nextBid()">Next Bid</button>
+              <button class="btn btn-danger" onclick="resetAuction()">
+                Reset Auction
+              </button>
+              <button
+                class="btn btn-warning"
+                id="undoBtn"
+                onclick="undoLastSale()"
+                disabled
+              >
+                Undo
+              </button>
+
+              <div class="sold-to-inline">
+                <label for="soldToTeam">Sell Player To:</label>
+                <select id="soldToTeam">
+                  <option value="">Select Team</option>
+                </select>
+                <button
+                  class="btn btn-success confirm-sale-btn"
+                  onclick="sellPlayer()"
+                >
+                  Confirm Sale
+                </button>
+              </div>
+            </div>
+
+            <div class="bid-increment-row">
+              <label>Bid Increment:</label>
+              <input
+                type="number"
+                id="bidIncrement"
+                value="10"
+                min="1"
+                class="increment-input"
+              />
+              <span> points</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Setup Section -->
+      <div class="setup-section" id="setupSection">
+        <h2>Auction Page</h2>
+
+        <div class="form-group">
+          <label for="fileInput">Upload Player Data (Excel/CSV):</label>
+          <div
+            class="file-upload"
+            onclick="document.getElementById('fileInput').click()"
+          >
+            <input type="file" id="fileInput" accept=".xlsx,.xls,.csv" />
+            <p>📁 Click to upload Excel or CSV file</p>
+            <small
+              >File should contain: Player Name, Player Type, Base Price</small
+            >
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="teamCount">Number of Teams (2-6):</label>
+          <select id="teamCount">
+            <option value="2">2 Teams</option>
+            <option value="3">3 Teams</option>
+            <option value="4">4 Teams</option>
+            <option value="5">5 Teams</option>
+            <option value="6">6 Teams</option>
+          </select>
+        </div>
+
+        <div class="toggle-row">
+          <div class="toggle-container">
+            <span class="toggle-icon">🔀</span>
+            <label class="toggle-switch">
+              <input type="checkbox" id="randomOrderToggle" />
+              <span class="toggle-slider"></span>
+            </label>
+            <label for="randomOrderToggle" class="toggle-label">
+              Random Player Order
+            </label>
+          </div>
+
+          <div class="toggle-container">
+            <span class="toggle-icon">💬</span>
+            <label class="toggle-switch">
+              <input type="checkbox" id="whatsappToggle" />
+              <span class="toggle-slider"></span>
+            </label>
+            <label for="whatsappToggle" class="toggle-label">
+              Send Message
+            </label>
+          </div>
+        </div>
+
+        <div class="teams-grid" id="teamNamesSection">
+          <!-- Team name inputs will be generated here -->
+        </div>
+
+        <button class="btn" onclick="startAuction()">Start Auction</button>
+
+        <div class="loading" id="loading">
+          <div class="spinner"></div>
+          <p>Processing file...</p>
+        </div>
+      </div>
+
+      <!-- Auction Section -->
+      <div class="auction-section hidden" id="auctionSection">
+        <div class="teams-status">
+          <h3>Team Status</h3>
+          <div id="teamsDisplay">
+            <!-- Team status will be displayed here -->
+          </div>
+        </div>
+        <div class="export-section">
+          <button class="btn btn-success" onclick="exportResults()">
+            📊 Export Auction Results
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="pa.js"></script>
+  </body>
+</html>
