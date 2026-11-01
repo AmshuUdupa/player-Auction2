@@ -4,6 +4,7 @@ let teams = [];
 let currentPlayerIndex = 0;
 let currentBid = 0;
 const WHATSAPP_PHONE = '919742884585';
+let teamPurseTotal = 100;
 let soldPlayers = [];
 let unsoldPlayers = [];
 let pendingNextPlayerTimeout = null;
@@ -97,6 +98,11 @@ function parseExcel(arrayBuffer) {
   updateRemainingPlayersDisplay();
 }
 
+function getTeamPurseFromUI() {
+  const value = parseInt(document.getElementById('teamPurse').value, 10);
+  return value > 0 ? value : 100;
+}
+
 function shuffleArray(array) {
   const shuffled = [...array];
   for (let i = shuffled.length - 1; i > 0; i--) {
@@ -119,13 +125,14 @@ function startAuction() {
   }
 
   const teamCount = parseInt(document.getElementById('teamCount').value);
+  teamPurseTotal = getTeamPurseFromUI();
   teams = [];
 
   for (let i = 1; i <= teamCount; i++) {
     const teamName = document.getElementById(`team${i}`).value || `Team ${i}`;
     teams.push({
       name: teamName,
-      purse: 100,
+      purse: teamPurseTotal,
       players: [],
     });
   }
@@ -406,7 +413,7 @@ function updateTeamsDisplay() {
       <div>
         <div class="team-name">${team.name}</div>
         <small>${team.players.length} players • Spent: ${
-      100 - team.purse
+      teamPurseTotal - team.purse
     } points</small>
       </div>
       <div class="team-purse">${team.purse} points remaining</div>
@@ -455,7 +462,7 @@ function resetAuction() {
       pendingNextPlayerTimeout = null;
     }
     teams.forEach((team) => {
-      team.purse = 100;
+      team.purse = teamPurseTotal;
       team.players = [];
     });
 
@@ -484,7 +491,7 @@ function exportResults() {
     'Team Name': team.name,
     'Remaining Purse': team.purse,
     'Players Count': team.players.length,
-    'Total Spent': 100 - team.purse,
+    'Total Spent': teamPurseTotal - team.purse,
   }));
   const teamSummaryWS = XLSX.utils.json_to_sheet(teamSummary);
   XLSX.utils.book_append_sheet(wb, teamSummaryWS, 'Team Summary');

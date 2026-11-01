@@ -138,6 +138,16 @@ body {
   border-bottom: 2px solid #f0f0f0;
 }
 
+.setup-options-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.setup-options-row .form-group {
+  margin-bottom: 12px;
+}
+
 .form-group {
   margin-bottom: 12px;
 }
@@ -548,6 +558,10 @@ body {
 
   .header-auction {
     flex-direction: column;
+  }
+
+  .setup-options-row {
+    grid-template-columns: 1fr;
   }
 
   #teamsDisplay {

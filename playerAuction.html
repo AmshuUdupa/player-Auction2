@@ -89,15 +89,22 @@
           </div>
         </div>
 
-        <div class="form-group">
-          <label for="teamCount">Number of Teams (2-6):</label>
-          <select id="teamCount">
-            <option value="2">2 Teams</option>
-            <option value="3">3 Teams</option>
-            <option value="4">4 Teams</option>
-            <option value="5">5 Teams</option>
-            <option value="6">6 Teams</option>
-          </select>
+        <div class="setup-options-row">
+          <div class="form-group">
+            <label for="teamCount">Number of Teams (2-6):</label>
+            <select id="teamCount">
+              <option value="2">2 Teams</option>
+              <option value="3">3 Teams</option>
+              <option value="4">4 Teams</option>
+              <option value="5">5 Teams</option>
+              <option value="6">6 Teams</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="teamPurse">Points per team:</label>
+            <input type="number" id="teamPurse" value="100" min="1" />
+          </div>
         </div>
 
         <div class="toggle-row">
